@@ -4,11 +4,11 @@ var UPDATE_SPEED = 50;
 var PI = 3.14159;
 var NUM_PARTICALS = 1000;
 var NUM_EXPLOSIONS = 10;
-var COLORS = [/*'RED', 'GREEN', 'BLUE',*/ 'BLUE_PURPLE', 'RED_YELLOW', 'RED_ORANGE', 'YELLOW_GREEN', 'YELLOW_ORANGE', 'RED_PURPLE', 'RED_BLUE', 'RED_YELLOW_ORANGE'];
+var COLORS = ['RED', 'GREEN', 'BLUE', 'BLUE_PURPLE', 'RED_YELLOW', 'RED_ORANGE', 'YELLOW_GREEN', 'YELLOW_ORANGE', 'RED_PURPLE', 'RED_BLUE', 'RED_YELLOW_ORANGE'];
 var VARIATIONS = ['EXPLOSION', 'CONE', 'WARP','STAR'];
-// var VARIATIONS = ['STAR'];
+// var VARIATIONS = ['WARP'];
 var time = 0;
-var timeProgress = .25;
+var timeProgress = .05;
 
 function drawRect(x, y, size, r, g, b) {
     ctx.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
@@ -66,7 +66,9 @@ function genParticals() {
     }
     else if (explosion.variation == 'WARP') {
         startAngle = [];
-        for (var i = 0; i < 360; i += 5) {
+        for (var i = 0; i < 360; i++) {
+            startPosX = SCREEN_SIZE / 2;
+            startPosY = SCREEN_SIZE / 2;
             startAngle.push(i);
         }
     }
@@ -83,6 +85,9 @@ function genParticals() {
         if (explosion.variation == 'WARP') {
             x = startPosX;
             y = startPosY;
+            color.r = 255;
+            color.g = 255;
+            color.b = 255;
         }
         else if (explosion.variation == 'STAR') {
             x = startPosX;
@@ -198,11 +203,11 @@ function genParticals() {
         // var size = getRandomNum(.1, .5, false);
         var size = getRandomNum(1, 2, false);
         var velocity;
-        if (explosion.variation != 'STAR') {
-            velocity = getRandomNum(1, 3, false);
+        if (explosion.variation == 'WARP') {
+            velocity = getRandomNum(1, 10, false);
         }
         else {
-            velocity = 3;
+            velocity = getRandomNum(1, 3, false);
         }
         if (explosion.variation == 'EXPLOSION') {
             var direction = getRandomNum(0, 360, false);
@@ -246,8 +251,8 @@ function loop() {
             if (explosion.startTime <= time) {
                 if (partical != undefined) {
                     if (explosion.variation == 'WARP') {
-                        partical.x += partical.updateX * (partical.velocity + Math.pow(time - explosion.startTime, 2));
-                        partical.y += partical.updateY * (partical.velocity + Math.pow(time - explosion.startTime, 2));
+                        partical.x += partical.updateX * (partical.velocity + Math.pow(time - explosion.startTime, 4));
+                        partical.y += partical.updateY * (partical.velocity + Math.pow(time - explosion.startTime, 4));
                     }
                     else if (explosion.variation == 'STAR') {
                         if (partical.lifespan / 2 < time - explosion.startTime) {
