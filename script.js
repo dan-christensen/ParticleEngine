@@ -6,7 +6,7 @@ var NUM_PARTICALS = 1000;
 var NUM_EXPLOSIONS = 10;
 var COLORS = [/*'RED', 'GREEN', 'BLUE',*/ 'BLUE_PURPLE', 'RED_YELLOW', 'RED_ORANGE', 'YELLOW_GREEN', 'YELLOW_ORANGE', 'RED_PURPLE', 'RED_BLUE', 'RED_YELLOW_ORANGE'];
 var VARIATIONS = ['EXPLOSION', 'CONE', 'WARP','STAR'];
-// var VARIATIONS = ['WARP'];
+// var VARIATIONS = ['STAR'];
 var time = 0;
 var timeProgress = .25;
 
@@ -72,7 +72,7 @@ function genParticals() {
     }
     else if (explosion.variation == 'STAR') {
         startAngle = [];
-        for (var i = 0; i < 360; i += 36) {
+        for (var i = 0; i < 360; i += 45) {
             startAngle.push(i);
         }
     }
@@ -87,8 +87,7 @@ function genParticals() {
         else if (explosion.variation == 'STAR') {
             x = startPosX;
             y = startPosY;
-            var outerScale = explosion.scale * 25;
-            var innerScale = outerScale / 5;
+            var scale = explosion.scale * 25;
             var point1X = 6;
             var point1Y = -2;
             var point2X = 2;
@@ -107,100 +106,82 @@ function genParticals() {
             var point8Y = 0;
             switch (direction) {
                 case 0:
-                    var x1 = 9.5 * innerScale;
-                    var y1 = 5 * innerScale;
-                    var x2 = 3.625 * outerScale;
-                    var y2 = -0.875 * outerScale;
+                    var x1 = point1X * scale;
+                    var y1 = point1Y * scale;
+                    var x2 = point2X * scale;
+                    var y2 = point2Y * scale;
                     var u = Math.random();
                     x += (1 - u) * x1 + u * x2;
                     y += (1 - u) * y1 + u * y2;
                     break;
-                case 36:
-                    var x1 = 3.625 * outerScale;
-                    var y1 = -0.875 * outerScale;
-                    var x2 = 7.25 * innerScale;
-                    var y2 = -11.75 * innerScale;
+                case 45:
+                    var x1 = point2X * scale;
+                    var y1 = point2Y * scale;
+                    var x2 = point3X * scale;
+                    var y2 = point3Y * scale;
                     var u = Math.random();
                     x += (1 - u) * x1 + u * x2;
                     y += (1 - u) * y1 + u * y2;
                     break;
-                case 72:
-                    var x1 = 7.25 * innerScale;
-                    var y1 = -11.75 * innerScale;
-                    var x2 = 0 * outerScale;
-                    var y2 = -4.5 * outerScale;
+                case 90:
+                    var x1 = point3X * scale;
+                    var y1 = point3Y * scale;
+                    var x2 = point4X * scale;
+                    var y2 = point4Y * scale;
                     var u = Math.random();
                     x += (1 - u) * x1 + u * x2;
                     y += (1 - u) * y1 + u * y2;
                     break;
-                case 108:
-                    var x1 = 0 * outerScale;
-                    var y1 = -4.5 * outerScale;
-                    var x2 = -7.25 * innerScale;
-                    var y2 = -11.75 * innerScale;
-                    var u = Math.random();
-                    x += (1 - u) * x1 + u * x2;
-                    y += (1 - u) * y1 + u * y2;
-                    break;
-                case 144:
-                    var x1 = -7.25 * innerScale;
-                    var y1 = -11.75 * innerScale;
-                    var x2 = -3.625 * outerScale;
-                    var y2 = -0.875 * outerScale;
+                case 135:
+                    var x1 = point4X * scale;
+                    var y1 = point4Y * scale;
+                    var x2 = point5X * scale;
+                    var y2 = point5Y * scale;
                     var u = Math.random();
                     x += (1 - u) * x1 + u * x2;
                     y += (1 - u) * y1 + u * y2;
                     break;
                 case 180:
-                    var x1 = -3.625 * outerScale;
-                    var y1 = -0.875 * outerScale;
-                    var x2 = -9.5 * innerScale;
-                    var y2 = 5 * innerScale;
+                    var x1 = point5X * scale;
+                    var y1 = point5Y * scale;
+                    var x2 = point6X * scale;
+                    var y2 = point6Y * scale;
                     var u = Math.random();
                     x += (1 - u) * x1 + u * x2;
                     y += (1 - u) * y1 + u * y2;
                     break;
-                case 216:
-                    var x1 = -9.5 * innerScale;
-                    var y1 = 5 * innerScale;
-                    var x2 = -1.667 * outerScale;
-                    var y2 = 5 * outerScale;
+                case 225:
+                    var x1 = point6X * scale;
+                    var y1 = point6Y * scale;
+                    var x2 = point7X * scale;
+                    var y2 = point7Y * scale;
                     var u = Math.random();
                     x += (1 - u) * x1 + u * x2;
                     y += (1 - u) * y1 + u * y2;
                     break;
-                case 252:
-                    var x1 = -1.667 * outerScale;
-                    var y1 = 5 * outerScale;
-                    var x2 = 0 * innerScale;
-                    var y2 = 10 * innerScale;
+                case 270:
+                    var x1 = point7X * scale;
+                    var y1 = point7Y * scale;
+                    var x2 = point8X * scale;
+                    var y2 = point8Y * scale;
                     var u = Math.random();
                     x += (1 - u) * x1 + u * x2;
                     y += (1 - u) * y1 + u * y2;
                     break;
-                case 288:
-                    var x1 = 0 * innerScale;
-                    var y1 = 10 * innerScale;
-                    var x2 = 1.667 * outerScale;
-                    var y2 = 5 * outerScale;
-                    var u = Math.random();
-                    x += (1 - u) * x1 + u * x2;
-                    y += (1 - u) * y1 + u * y2;
-                    break;
-                case 324:
-                    var x1 = 1.667 * outerScale;
-                    var y1 = 5 * outerScale;
-                    var x2 = 9.5 * innerScale;
-                    var y2 = 5 * innerScale;
+                case 315:
+                    var x1 = point8X * scale;
+                    var y1 = point8Y * scale;
+                    var x2 = point1X * scale;
+                    var y2 = point1Y * scale;
                     var u = Math.random();
                     x += (1 - u) * x1 + u * x2;
                     y += (1 - u) * y1 + u * y2;
                     break;
                 default:
-                    var x1 = 9.5 * innerScale;
-                    var y1 = 5 * innerScale;
-                    var x2 = 3.625 * outerScale;
-                    var y2 = -0.875 * outerScale;
+                    var x1 = point8X * scale;
+                    var y1 = point8Y * scale;
+                    var x2 = point1X * scale;
+                    var y2 = point1Y * scale;
                     var u = Math.random();
                     x += (1 - u) * x1 + u * x2;
                     y += (1 - u) * y1 + u * y2;
