@@ -3,12 +3,23 @@ var SCREEN_SIZE = 500;
 var UPDATE_SPEED = 50;
 var PI = 3.14159;
 var NUM_PARTICALS = 1000;
-var NUM_EXPLOSIONS = 10;
+var NUM_EXPLOSIONS = 1000;
 var COLORS = ['RED', 'GREEN', 'BLUE', 'BLUE_PURPLE', 'RED_YELLOW', 'RED_ORANGE', 'YELLOW_GREEN', 'YELLOW_ORANGE', 'RED_PURPLE', 'RED_BLUE', 'RED_YELLOW_ORANGE'];
 var VARIATIONS = ['EXPLOSION', 'CONE', 'WARP','STAR'];
 // var VARIATIONS = ['WARP'];
+
 var time = 0;
 var timeProgress = .05;
+
+var speedSlider = document.getElementById('speedSlider');
+var speedOutput = document.getElementById('speedValue');
+speedSlider.value = timeProgress;
+speedOutput.innerHTML = speedSlider.value;
+speedSlider.oninput = function () {
+    speedOutput.innerHTML = this.value;
+    timeProgress = parseFloat(this.value, 10);
+}
+
 
 function drawRect(x, y, size, r, g, b) {
     ctx.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
